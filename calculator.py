@@ -8,8 +8,8 @@ class Calculator:
     def multiply(self, a, b):
         result = 0
 
-        if b < 0: 
-            return 0 - self.divide(self, a, 0 - b)
+        if b < 0:
+            return 0 - self.multiply(a, 0 - b)
         
         for i in range(b):
             result = self.add(result, a)
@@ -19,12 +19,12 @@ class Calculator:
         result = 0
 
         if b == 0:
-            raise ValueError("Division by zero")
+            return 0;
             
         if b < 0:
-            return -self.divide(a, -b)
+            return 0 - self.divide(a, 0 - b)
         if a < 0:
-            return -self.divide(-a, b)
+            return 0 - self.divide(0 - a, b)
         
         while a >= b:
             a = self.subtract(a, b)
@@ -32,7 +32,13 @@ class Calculator:
         return result
     
     def modulo(self, a, b):
-        while a <= b:
+
+        if a < 0:
+            a = 0 - a;
+        if b < 0:
+            b = 0 - b;
+        
+        while a >= b:
             a = a-b
         return a
 
