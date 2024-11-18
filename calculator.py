@@ -7,13 +7,26 @@ class Calculator:
 
     def multiply(self, a, b):
         result = 0
-        for i in range(b+1):
+
+        if b < 0: 
+            return 0 - self.divide(self, a, 0 - b)
+        
+        for i in range(b):
             result = self.add(result, a)
         return result
 
     def divide(self, a, b):
         result = 0
-        while a > b:
+
+        if b == 0:
+            raise ValueError("Division by zero")
+            
+        if b < 0:
+            return -self.divide(a, -b)
+        if a < 0:
+            return -self.divide(-a, b)
+        
+        while a >= b:
             a = self.subtract(a, b)
             result += 1
         return result
